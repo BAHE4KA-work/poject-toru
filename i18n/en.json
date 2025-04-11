@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "repeat_password": "Repeat Password",
+    "login": "LogIn",
+    "register": "Register",
+    "forgot": "Forgot password?",
+    "help": "Need help?",
+    "language": "Language",
+    "continue": "continue",
+    "singup": "Sing up"
+    }
+  }
+  
