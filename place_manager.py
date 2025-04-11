@@ -1,12 +1,12 @@
 from database import get_session, Place
-from local_types import PlaceObject, PlaceOutput, PlaceFilterObject, PlaceFilterInput
+from local_types import PlaceObject, PlaceOutput, PlaceFilterObject, PlaceFilterInput, PlaceObjectOutput
 
 
 async def get_list(lang: str = 'ru') -> list:
     session = get_session()
     l = session.query(Place).all()
     session.close()
-    return [PlaceOutput(**i.__dict__).__dict__ for i in l]
+    return [PlaceObjectOutput(**i.__dict__).__dict__ for i in l]
 
 
 async def get_list_page(data: PlaceFilterInput):
