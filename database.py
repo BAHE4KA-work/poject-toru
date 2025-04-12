@@ -69,6 +69,9 @@ class Bonus(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
 
+    name: Mapped[str] = mapped_column(String, nullable=True, default='')
+    price: Mapped[int] = mapped_column(Integer, nullable=True, default=None)
+
     user: Type['User'] = relationship('User', back_populates='bonuses')
 
 
@@ -137,6 +140,15 @@ class DoneQuest(Base):
     user_id: Mapped[int] = mapped_column(Integer, nullable=True, default=None)
 
     quest: Type['Quest'] = relationship('Quest', back_populates='done')
+
+
+class Phrase(Base):
+    __tablename__ = 'phrases'
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    native_lang: Mapped[str] = mapped_column(String)
+    translit: Mapped[str] = mapped_column(String)
+    russian: Mapped[str] = mapped_column(String)
 
 
 engine = create_engine(DATABASE_URL)

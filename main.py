@@ -9,8 +9,9 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 import user_manager as um
 import place_manager as pm
+import booking_manager as bm
 from config import ACCESS_TOKEN_EXPIRE_MINUTES, oauth2_scheme
-from database import create_databases
+from database import create_databases, get_session, Phrase
 from local_types import PlaceObject, PlaceFilterInput, UserCreateForm, ProfileObject
 
 app = FastAPI()
@@ -78,6 +79,20 @@ async def create_place(place: PlaceObject):
 async def delete_place(place_id: int):
     await pm.delete_place(place_id)
     return JSONResponse('success', status_code=200)
+
+
+@app.post('/booking/do/{place_id}', tags=['Бронирование'])
+async def do_booking(place_id: int, token: str = Depends(oauth2_scheme)):
+    await bm.order(place_id, token)
+    return JSONResponse('success', status_code=200)
+
+
+@app.get('/phrases/{lang}', tags=['Фразы'])
+async def get_phrase_list(lang: str):
+    session = get_session()
+    data = session.query(Phrase).all()
+    session.close()
+    return JSONResponse([i.__dict__ for i in data], status_code=200)
 
 
 if __name__ == '__main__':
