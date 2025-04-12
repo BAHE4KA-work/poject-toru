@@ -26,7 +26,6 @@ class User(Base):
     coins: Mapped[int] = mapped_column(Integer, default=0)
 
     token: Type['SessionToken'] = relationship('SessionToken', back_populates='user')
-    bonuses: Type['Bonus'] = relationship('Bonus', back_populates='user')
     profile: Type['Profile'] = relationship('Profile', back_populates='user')
 
 
@@ -63,18 +62,31 @@ class Bonus(Base):
     __allow_unmapped__ = True
     __tablename__ = 'bonuses'
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
 
     name: Mapped[str] = mapped_column(String, nullable=True, default='')
+    lang: Mapped[str] = mapped_column(String, nullable=True, default='ru')
     price: Mapped[int] = mapped_column(Integer, nullable=True, default=None)
 
-    user: Type['User'] = relationship('User', back_populates='bonuses')
+    user_bonus: Type['UserBonus'] = relationship('UserBonus', back_populates='bonus')
+
+
+class UserBonus(Base):
+    __allow_unmapped__ = True
+    __tablename__ = 'user_bonuses'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    bonus_id: Mapped[int] = mapped_column(ForeignKey('bonuses.id'))
+
+    user_id: Mapped[int] = mapped_column(Integer)
+
+    bonus: Type['Bonus'] = relationship('Bonos', back_populates='user_bonuses')
 
 
 class Place(Base):
     __allow_unmapped__ = True
     __tablename__ = 'places'
     id: Mapped[int] = mapped_column(primary_key=True)
+
+    lang: Mapped[str] = mapped_column(String, nullable=True, default='ru')
 
     lat: Mapped[float] = mapped_column(Float, nullable=True, default=0.0)
     long: Mapped[float] = mapped_column(Float, nullable=True, default=0.0)
@@ -120,6 +132,8 @@ class Quest(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     place_id: Mapped[int] = mapped_column(ForeignKey('places.id'))
 
+    lang: Mapped[str] = mapped_column(String, nullable=True, default='ru')
+
     value: Mapped[int] = mapped_column(Integer)
     goal: Mapped[str] = mapped_column(String, nullable=True, default='')
 
@@ -142,6 +156,8 @@ class Phrase(Base):
     __tablename__ = 'phrases'
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    native_lang: Mapped[str] = mapped_column(String)
+    lang: Mapped[str] = mapped_column(String, nullable=True, default='en')
+
+    native: Mapped[str] = mapped_column(String)
     translit: Mapped[str] = mapped_column(String)
     russian: Mapped[str] = mapped_column(String)

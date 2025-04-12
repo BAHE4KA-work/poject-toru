@@ -6,12 +6,12 @@ from app.schemas.place import *
 
 
 async def get_list(session: Session, lang: str = 'ru') -> list:
-    l = session.query(Place).all()
+    l = session.query(Place).filter_by(lang=lang).all()
     return [PlaceObjectOutput(**i.__dict__).__dict__ for i in l]
 
 
-async def get_list_page(session: Session, data: PlaceFilterInput):
-    l = session.query(Place)
+async def get_list_page(session: Session, data: PlaceFilterInput, lang: str = 'ru'):
+    l = session.query(Place).filter_by(lang=lang)
     filters = PlaceFilterObject(**data.__dict__).__dict__
     a = []
     for k in filters.keys():

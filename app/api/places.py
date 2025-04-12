@@ -14,9 +14,9 @@ async def get_places_list(session: Session = Depends(get_db), lang: str = 'ru'):
     return JSONResponse(await get_list(session, lang), status_code=200)
 
 
-@router.post('/pages/')
-async def get_place_list(data: PlaceFilterInput, session: Session = Depends(get_db)):
-    return JSONResponse([i.__dict__ for i in await get_list_page(session, data)], status_code=200)
+@router.post('/pages/{lang}')
+async def get_place_filtered_list(lang: str, data: PlaceFilterInput, session: Session = Depends(get_db)):
+    return JSONResponse([i.__dict__ for i in await get_list_page(session, data, lang)], status_code=200)
 
 
 @router.post('/create')
