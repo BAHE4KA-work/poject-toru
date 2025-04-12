@@ -1,0 +1,9 @@
+/legacy/
+legacy/booking_manager.py
+legacy/config.py
+legacy/database.db
+legacy/local_types.py
+legacy/database.py
+/legacy
+legacy/place_manager.py
+legacy/user_manager.py

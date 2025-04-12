@@ -62,6 +62,7 @@ async def delete_token(token: str):
     session.close()
     return 'Token deleted'
 
+
 async def profile_post(token: str, profile: ProfileObject):
     profile = profile.__dict__
     session = get_session()
