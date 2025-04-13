@@ -41,13 +41,13 @@ class PlaceObjectOutput(Base):
     price: str
     tip: str
 
-    img_url: str
+    img_url: Optional[str]
 
 
 class PlaceFilterObject(Base):
     kid_friendly: Optional[bool] = None
-    internet_mark: Optional[bool] = None
-    mark: Optional[bool] = None
+    internet_mark: Optional[float] = None
+    mark: Optional[float] = None
     with_pets: Optional[bool] = None
     category: Optional[str] = None
     food_type: Optional[str] = None

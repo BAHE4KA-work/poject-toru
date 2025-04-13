@@ -30,7 +30,7 @@ async def get_list_bonus(lang: str = 'ru', session: Session = Depends(get_db)):
 
 
 @router.get('/get_my_bonus_list')
-async def get_my_bonus_list(token: str, session: Session = Depends(get_db)):
+async def get_my_bonus_list(token: str = Depends(oauth2_scheme), session: Session = Depends(get_db)):
     return JSONResponse(await get_my_bonuses(session, token), status_code=200)
 
 

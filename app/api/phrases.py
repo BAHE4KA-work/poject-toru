@@ -10,5 +10,5 @@ router = APIRouter(prefix="/phrases", tags=["Фразы"])
 
 @router.get('/{lang}')
 async def get_phrase_list(lang: str, session: Session = Depends(get_db)):
-    data = session.query(Phrase).all()
-    return JSONResponse([i.__dict__ for i in data], status_code=200)
+    data = session.query(Phrase).filter_by(lang=lang).all()
+    return JSONResponse([{key: value for key, value in i.__dict__.items() if key != '_sa_instance_state'} for i in data], status_code=200)

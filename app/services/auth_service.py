@@ -68,3 +68,7 @@ async def post_profile(session: Session, token: str, profile: ProfileObject):
     session.commit()
     session.refresh(profile_object)
     return profile_object
+
+
+async def get_my_user(token: str, session: Session):
+    return {key: value for key, value in session.query(SessionToken).filter_by(token=token).first().user.__dict__.items() if key != '_sa_instance_state'}

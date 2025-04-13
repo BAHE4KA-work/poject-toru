@@ -23,7 +23,7 @@ async def get_list_page(session: Session, data: PlaceFilterInput, lang: str = 'r
         l.filter_by(**filters)
     except:
         pass
-    return l.limit(data.items_per_page).offset((data.page - 1) * data.items_per_page)
+    return l.limit(data.items_per_page).offset((data.page - 1) * data.items_per_page).all()
 
 async def place_create(session: Session, place: PlaceObject):
     place = Place(**place.__dict__)

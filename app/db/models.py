@@ -78,7 +78,7 @@ class UserBonus(Base):
 
     user_id: Mapped[int] = mapped_column(Integer)
 
-    bonus: Type['Bonus'] = relationship('Bonos', back_populates='user_bonuses')
+    bonus: Type['Bonus'] = relationship('Bonus', back_populates='user_bonus')
 
 
 class Place(Base):
