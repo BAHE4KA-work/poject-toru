@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "email": "Email",
+    "password": "Пароль",
+    "repeat_password": "Повторите Пароль",
+    "login": "Вход",
+    "register": "Регистрация",
+    "forgot": "Забыли пароль?",
+    "help": "Нужна помощь?",
+    "language": "Язык",
+    "continue": "Войти",
+    "singup": "Зарегистрироваться "
+    }
+  }
+  

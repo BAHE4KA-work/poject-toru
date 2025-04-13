@@ -1,0 +1,18 @@
+{
+    "welcome": "欢迎",
+    "choose_language": "请选择语言",
+    "settings": "设置",
+    "change_to_english": "切换到英语",
+    "change_to_russian": "切换到俄语",
+    "change_to_chinese": "切换到中文",
+    "page": {
+      "home": "首页",
+      "about": "关于我们"
+    },
+    "language_names": {
+      "en": "English",
+      "ru": "Русский",
+      "zh": "中文"
+    }
+  }
+  

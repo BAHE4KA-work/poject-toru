@@ -1,0 +1,35 @@
+<!-- assets/streetview.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>StreetView</title>
+    <style>
+      html, body, #pano {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+  </head>
+  <body>
+    <div id="pano"></div>
+    <script>
+      function init() {
+        const lat = 48.8584;
+        const lng = 2.2945;
+        const panorama = new google.maps.StreetViewPanorama(
+          document.getElementById("pano"),
+          {
+            position: { lat, lng },
+            pov: { heading: 165, pitch: 0 },
+            zoom: 1
+          }
+        );
+      }
+      window.onload = init;
+    </script>
+  </body>
+</html>
